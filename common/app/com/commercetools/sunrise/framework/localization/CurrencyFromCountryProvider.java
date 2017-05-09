@@ -14,7 +14,7 @@ public final class CurrencyFromCountryProvider implements Provider<CurrencyUnit>
     private final ProjectContext projectContext;
 
     @Inject
-    public CurrencyFromCountryProvider(final CountryCode country, final ProjectContext projectContext) {
+    CurrencyFromCountryProvider(final CountryCode country, final ProjectContext projectContext) {
         this.country = country;
         this.projectContext = projectContext;
     }

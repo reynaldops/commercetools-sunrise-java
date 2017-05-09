@@ -1,9 +1,9 @@
 package com.commercetools.sunrise.framework.checkout.payment;
 
 import com.commercetools.sunrise.framework.localization.ProjectContext;
-import com.commercetools.sunrise.framework.template.i18n.I18nIdentifier;
-import com.commercetools.sunrise.framework.template.i18n.I18nIdentifierFactory;
-import com.commercetools.sunrise.framework.template.i18n.I18nResolver;
+import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifier;
+import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifierFactory;
+import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.LocalizedStringEntry;
@@ -34,12 +34,12 @@ final class PaymentSettingsImpl implements PaymentSettings {
 
     @Inject
     PaymentSettingsImpl(final Configuration configuration, final ProjectContext projectContext,
-                        final I18nResolver i18nResolver, final I18nIdentifierFactory i18nIdentifierFactory) {
+                        final I18nResolverLoader i18nResolverLoader, final I18nIdentifierFactory i18nIdentifierFactory) {
         this.paymentMethods = configuration.getConfigList(CONFIG_PAYMENT_KEY, emptyList()).stream()
                 .map(paymentConfig -> {
                     final LocalizedString name = Optional.ofNullable(paymentConfig.getString(CONFIG_NAME_FIELD_KEY))
                             .map(i18nIdentifierFactory::create)
-                            .map(i18nIdentifier -> buildLocalizedName(i18nIdentifier, i18nResolver, projectContext))
+                            .map(i18nIdentifier -> buildLocalizedName(i18nIdentifier, i18nResolverLoader, projectContext))
                             .orElse(null);
                     return PaymentMethodInfoBuilder.of()
                             .name(name)
@@ -55,10 +55,10 @@ final class PaymentSettingsImpl implements PaymentSettings {
         return completedFuture(paymentMethods);
     }
 
-    private static LocalizedString buildLocalizedName(final I18nIdentifier nameI18nIdentifier, final I18nResolver i18nResolver,
+    private static LocalizedString buildLocalizedName(final I18nIdentifier nameI18nIdentifier, final I18nResolverLoader i18nResolverLoader,
                                                       final ProjectContext projectContext) {
         return projectContext.locales().stream()
-                .map(locale -> LocalizedStringEntry.of(locale, i18nResolver.getOrKey(singletonList(locale), nameI18nIdentifier)))
+                .map(locale -> LocalizedStringEntry.of(locale, i18nResolverLoader.getOrKey(singletonList(locale), nameI18nIdentifier)))
                 .collect(LocalizedString.streamCollector());
     }
 }

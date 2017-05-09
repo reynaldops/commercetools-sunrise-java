@@ -9,8 +9,8 @@ import com.commercetools.sunrise.framework.components.controllers.PageHeaderCont
 import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.reverserouters.shoppingcart.cart.CartReverseRouter;
-import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.TemplateControllerComponentsSupplier;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
 import io.sphere.sdk.carts.Cart;
 import play.data.FormFactory;

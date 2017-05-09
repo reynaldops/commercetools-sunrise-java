@@ -1,13 +1,21 @@
 package com.commercetools.sunrise.framework.injection;
 
-import com.commercetools.sunrise.ctp.SphereClientConfigProvider;
+import com.commercetools.sunrise.ctp.client.SphereClientConfigProvider;
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereClientConfig;
+import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.inject.Singleton;
 import javax.money.Monetary;
 import javax.money.format.MonetaryFormats;
+import java.time.Duration;
+
+import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 
 public class SunriseModule extends AbstractModule {
 
@@ -16,6 +24,12 @@ public class SunriseModule extends AbstractModule {
         applyJavaMoneyHack();
         bindScope(RequestScoped.class, new RequestScope());
         bind(SphereClientConfig.class).toProvider(SphereClientConfigProvider.class).in(Singleton.class);
+    }
+
+    @Provides
+    public Project provideProject(final SphereClient sphereClient) {
+        final SphereRequest<Project> request = ProjectGet.of();
+        return blockingWait(sphereClient.execute(request), Duration.ofSeconds(30));
     }
 
     private void applyJavaMoneyHack() {

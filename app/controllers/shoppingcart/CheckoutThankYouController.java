@@ -7,8 +7,8 @@ import com.commercetools.sunrise.framework.checkout.thankyou.viewmodels.Checkout
 import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.reverserouters.productcatalog.home.HomeReverseRouter;
-import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.TemplateControllerComponentsSupplier;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import play.mvc.Result;
 
 import javax.annotation.Nullable;

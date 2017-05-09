@@ -3,7 +3,7 @@ package com.commercetools.sunrise.framework.checkout.thankyou;
 import com.commercetools.sunrise.framework.controllers.SunriseContentController;
 import com.commercetools.sunrise.framework.controllers.WithQueryFlow;
 import com.commercetools.sunrise.framework.viewmodels.content.PageContent;
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import com.commercetools.sunrise.framework.reverserouters.SunriseRoute;
 import com.commercetools.sunrise.framework.hooks.EnableHooks;
 import com.commercetools.sunrise.framework.reverserouters.shoppingcart.checkout.CheckoutReverseRouter;

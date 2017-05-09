@@ -4,8 +4,8 @@ import com.commercetools.sunrise.framework.components.controllers.PageHeaderCont
 import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
 import com.commercetools.sunrise.framework.reverserouters.myaccount.addressbook.AddressBookReverseRouter;
 import com.commercetools.sunrise.framework.reverserouters.myaccount.authentication.AuthenticationReverseRouter;
-import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.TemplateControllerComponentsSupplier;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import com.commercetools.sunrise.myaccount.CustomerFinder;
 import com.commercetools.sunrise.myaccount.addressbook.AddressFormData;
 import com.commercetools.sunrise.myaccount.addressbook.addaddress.AddAddressControllerAction;

@@ -2,8 +2,8 @@ package controllers.shoppingcart;
 
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.components.controllers.RegisteredComponents;
-import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.TemplateControllerComponentsSupplier;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import com.commercetools.sunrise.sessions.cart.CartOperationsControllerComponentSupplier;
 import com.commercetools.sunrise.framework.CartFinder;
 import com.commercetools.sunrise.framework.cart.cartdetail.SunriseCartDetailController;

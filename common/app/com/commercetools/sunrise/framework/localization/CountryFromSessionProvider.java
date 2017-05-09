@@ -13,7 +13,7 @@ public final class CountryFromSessionProvider implements Provider<CountryCode> {
     private final CountryInSession countryInSession;
 
     @Inject
-    public CountryFromSessionProvider(final ProjectContext projectContext, final CountryInSession countryInSession) {
+    CountryFromSessionProvider(final ProjectContext projectContext, final CountryInSession countryInSession) {
         this.projectContext = projectContext;
         this.countryInSession = countryInSession;
     }

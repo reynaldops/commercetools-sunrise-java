@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.productcatalog.productdetail.viewmodels;
 
-import com.commercetools.sunrise.ctp.ProductAttributeSettings;
+import com.commercetools.sunrise.ctp.products.ProductAttributeSettings;
 import com.commercetools.sunrise.framework.injection.RequestScoped;
 import com.commercetools.sunrise.framework.viewmodels.SimpleViewModelFactory;
 import com.commercetools.sunrise.productcatalog.productdetail.ProductWithVariant;
@@ -112,7 +112,7 @@ public class ProductViewModelFactory extends SimpleViewModelFactory<ProductViewM
     }
 
     protected void fillVariantIdentifiers(final ProductViewModel viewModel, final ProductWithVariant productWithVariant) {
-        viewModel.setVariantIdentifiers(productAttributeSettings.getSelectableAttributes());
+        viewModel.setVariantIdentifiers(productAttributeSettings.selectable());
     }
 
     protected void fillAvailability(final ProductViewModel viewModel, final ProductWithVariant productWithVariant) {

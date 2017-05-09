@@ -6,7 +6,7 @@ import com.commercetools.sunrise.framework.controllers.WithContentFormFlow;
 import com.commercetools.sunrise.framework.hooks.EnableHooks;
 import com.commercetools.sunrise.framework.reverserouters.SunriseRoute;
 import com.commercetools.sunrise.framework.reverserouters.myaccount.authentication.AuthenticationReverseRouter;
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import com.commercetools.sunrise.myaccount.MyAccountController;
 import com.commercetools.sunrise.myaccount.authentication.signup.viewmodels.SignUpPageContentFactory;
 import io.sphere.sdk.client.ClientErrorException;

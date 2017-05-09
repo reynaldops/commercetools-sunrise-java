@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.framework.checkout.address;
 
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import com.commercetools.sunrise.framework.viewmodels.content.PageContent;
 import com.commercetools.sunrise.framework.CartFinder;
 import com.commercetools.sunrise.framework.WithRequiredCart;

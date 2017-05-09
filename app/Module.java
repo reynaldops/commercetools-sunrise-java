@@ -1,27 +1,26 @@
-import com.commercetools.sunrise.categorytree.CachedCategoryTreeProvider;
-import com.commercetools.sunrise.categorytree.CategoryTreeConfiguration;
-import com.commercetools.sunrise.categorytree.NavigationCategoryTree;
-import com.commercetools.sunrise.categorytree.NewCategoryTree;
 import com.commercetools.sunrise.cms.CmsService;
+import com.commercetools.sunrise.ctp.categories.CachedCategoryTreeProvider;
+import com.commercetools.sunrise.ctp.categories.CategorySettings;
+import com.commercetools.sunrise.ctp.categories.NavigationCategoryTree;
+import com.commercetools.sunrise.ctp.categories.NewCategoryTree;
 import com.commercetools.sunrise.framework.controllers.metrics.SimpleMetricsSphereClientProvider;
 import com.commercetools.sunrise.framework.injection.RequestScoped;
 import com.commercetools.sunrise.framework.localization.CountryFromSessionProvider;
 import com.commercetools.sunrise.framework.localization.CurrencyFromCountryProvider;
 import com.commercetools.sunrise.framework.localization.LocaleFromUrlProvider;
-import com.commercetools.sunrise.framework.template.cms.FileBasedCmsServiceProvider;
-import com.commercetools.sunrise.framework.template.engine.HandlebarsTemplateEngineProvider;
-import com.commercetools.sunrise.framework.template.engine.TemplateEngine;
-import com.commercetools.sunrise.framework.template.i18n.ConfigurableI18nResolverProvider;
-import com.commercetools.sunrise.framework.template.i18n.I18nResolver;
+import com.commercetools.sunrise.framework.theme.cms.filebased.FileBasedCmsServiceProvider;
+import com.commercetools.sunrise.framework.theme.engine.handlebars.HandlebarsProvider;
+import com.commercetools.sunrise.framework.theme.i18n.ConfigurableI18nResolverProvider;
+import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
 import com.commercetools.sunrise.framework.viewmodels.content.carts.MiniCartViewModelFactory;
 import com.commercetools.sunrise.httpauth.HttpAuthentication;
 import com.commercetools.sunrise.httpauth.basic.BasicAuthenticationProvider;
-import com.commercetools.sunrise.productcatalog.productoverview.search.facetedsearch.categorytree.viewmodels.CategoryTreeFacetViewModelFactory;
 import com.commercetools.sunrise.search.facetedsearch.terms.viewmodels.AlphabeticallySortedTermFacetViewModelFactory;
 import com.commercetools.sunrise.search.facetedsearch.terms.viewmodels.CustomSortedTermFacetViewModelFactory;
 import com.commercetools.sunrise.search.facetedsearch.terms.viewmodels.TermFacetViewModelFactory;
 import com.commercetools.sunrise.sessions.cart.TruncatedMiniCartViewModelFactory;
 import com.commercetools.sunrise.sessions.customer.CustomerInSession;
+import com.github.jknack.handlebars.Handlebars;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Names;
@@ -75,10 +74,10 @@ public class Module extends AbstractModule {
         bind(CmsService.class)
                 .toProvider(FileBasedCmsServiceProvider.class)
                 .in(Singleton.class);
-        bind(TemplateEngine.class)
-                .toProvider(HandlebarsTemplateEngineProvider.class)
+        bind(Handlebars.class)
+                .toProvider(HandlebarsProvider.class)
                 .in(Singleton.class);
-        bind(I18nResolver.class)
+        bind(I18nResolverLoader.class)
                 .toProvider(ConfigurableI18nResolverProvider.class)
                 .in(Singleton.class);
 
@@ -112,7 +111,7 @@ public class Module extends AbstractModule {
     @Provides
     @RequestScoped
     @NavigationCategoryTree
-    private CategoryTree provideNavigationCategoryTree(final CategoryTreeConfiguration configuration, final CategoryTree categoryTree) {
+    private CategoryTree provideNavigationCategoryTree(final CategorySettings configuration, final CategoryTree categoryTree) {
         return configuration.navigationExternalId()
                 .flatMap(categoryTree::findByExternalId)
                 .map(categoryTree::findChildren)
@@ -123,7 +122,7 @@ public class Module extends AbstractModule {
     @Provides
     @RequestScoped
     @NewCategoryTree
-    private CategoryTree provideNewCategoryTree(final CategoryTreeConfiguration configuration, final CategoryTree categoryTree) {
+    private CategoryTree provideNewCategoryTree(final CategorySettings configuration, final CategoryTree categoryTree) {
         return configuration.newExtId()
                 .flatMap(categoryTree::findByExternalId)
                 .map(categoryTree::findChildren)

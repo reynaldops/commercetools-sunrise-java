@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.productcatalog.productdetail.viewmodels;
 
-import com.commercetools.sunrise.ctp.ProductAttributeSettings;
+import com.commercetools.sunrise.ctp.products.ProductAttributeSettings;
 import com.commercetools.sunrise.framework.viewmodels.content.products.AttributeWithProductType;
 import com.commercetools.sunrise.framework.viewmodels.content.products.ProductAttributeViewModel;
 import com.commercetools.sunrise.framework.viewmodels.content.products.ProductAttributeViewModelFactory;
@@ -53,7 +53,7 @@ public class ProductDetailsViewModelFactory extends SimpleViewModelFactory<Produ
     }
 
     protected void fillList(final ProductDetailsViewModel viewModel, final ProductWithVariant productWithVariant) {
-        final List<ProductAttributeViewModel> attributes = productAttributeSettings.getDisplayedAttributes().stream()
+        final List<ProductAttributeViewModel> attributes = productAttributeSettings.displayed().stream()
                 .map(productWithVariant.getVariant()::getAttribute)
                 .filter(Objects::nonNull)
                 .map(attribute -> createProductAttributeViewModel(productWithVariant, attribute))

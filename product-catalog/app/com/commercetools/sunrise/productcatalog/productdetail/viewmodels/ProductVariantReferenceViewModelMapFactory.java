@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.productcatalog.productdetail.viewmodels;
 
-import com.commercetools.sunrise.ctp.ProductAttributeSettings;
+import com.commercetools.sunrise.ctp.products.ProductAttributeSettings;
 import com.commercetools.sunrise.framework.viewmodels.content.products.AttributeWithProductType;
 import com.commercetools.sunrise.framework.viewmodels.SimpleViewModelFactory;
 import com.commercetools.sunrise.framework.viewmodels.formatters.AttributeFormatter;
@@ -67,7 +67,7 @@ public class ProductVariantReferenceViewModelMapFactory extends SimpleViewModelF
     }
 
     private String createMapKey(final ProductVariant variant, final Referenceable<ProductType> productTypeRef) {
-        return productAttributeSettings.getSelectableAttributes().stream()
+        return productAttributeSettings.selectable().stream()
                 .map(variant::getAttribute)
                 .filter(Objects::nonNull)
                 .map(attribute -> attributeFormatter.encodedValue(AttributeWithProductType.of(attribute, productTypeRef)))

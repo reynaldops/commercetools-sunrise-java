@@ -17,7 +17,7 @@ public final class SimpleMetricsSphereClientProvider implements Provider<SimpleM
     private final SphereClientConfig sphereClientConfig;
 
     @Inject
-    public SimpleMetricsSphereClientProvider(final ApplicationLifecycle applicationLifecycle, final SphereClientConfig sphereClientConfig) {
+    SimpleMetricsSphereClientProvider(final ApplicationLifecycle applicationLifecycle, final SphereClientConfig sphereClientConfig) {
         this.applicationLifecycle = applicationLifecycle;
         this.sphereClientConfig = sphereClientConfig;
     }

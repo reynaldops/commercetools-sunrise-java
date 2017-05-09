@@ -15,7 +15,7 @@ public final class LocaleFromUrlProvider implements Provider<Locale> {
     private final ProjectContext projectContext;
 
     @Inject
-    public LocaleFromUrlProvider(final ProjectContext projectContext) {
+    LocaleFromUrlProvider(final ProjectContext projectContext) {
         this.projectContext = projectContext;
     }
 

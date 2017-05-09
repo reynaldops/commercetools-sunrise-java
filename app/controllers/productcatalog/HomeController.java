@@ -6,8 +6,8 @@ import com.commercetools.sunrise.framework.components.controllers.RegisteredComp
 import com.commercetools.sunrise.framework.controllers.cache.NoCache;
 import com.commercetools.sunrise.framework.controllers.metrics.LogMetrics;
 import com.commercetools.sunrise.framework.reverserouters.productcatalog.home.HomeReverseRouter;
-import com.commercetools.sunrise.framework.template.TemplateControllerComponentsSupplier;
-import com.commercetools.sunrise.framework.template.engine.ContentRenderer;
+import com.commercetools.sunrise.framework.theme.TemplateControllerComponentsSupplier;
+import com.commercetools.sunrise.framework.theme.engine.ContentRenderer;
 import com.commercetools.sunrise.productcatalog.home.HomeRecommendationsControllerComponent;
 import com.commercetools.sunrise.productcatalog.home.SunriseHomeController;
 import com.commercetools.sunrise.productcatalog.home.viewmodels.HomePageContentFactory;

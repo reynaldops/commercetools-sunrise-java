@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.framework.viewmodels.content.carts;
 
-import com.commercetools.sunrise.ctp.ProductAttributeSettings;
+import com.commercetools.sunrise.ctp.products.ProductAttributeSettings;
 import com.commercetools.sunrise.framework.viewmodels.content.products.AttributeWithProductType;
 import com.commercetools.sunrise.framework.viewmodels.content.products.ProductAttributeViewModel;
 import com.commercetools.sunrise.framework.viewmodels.content.products.ProductAttributeViewModelFactory;
@@ -53,7 +53,7 @@ public class LineItemExtendedViewModelFactory extends AbstractLineItemViewModelF
 
     protected void fillAttributes(final LineItemExtendedViewModel viewModel, final LineItem lineItem) {
         viewModel.setAttributes(lineItem.getVariant().getAttributes().stream()
-                .filter(attr -> productAttributeSettings.getSelectableAttributes().contains(attr.getName()))
+                .filter(attr -> productAttributeSettings.selectable().contains(attr.getName()))
                 .map(attribute -> createProductAttributeViewModel(lineItem, attribute))
                 .collect(toList()));
     }
