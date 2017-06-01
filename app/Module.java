@@ -9,7 +9,9 @@ import com.commercetools.sunrise.framework.localization.CountryFromSessionProvid
 import com.commercetools.sunrise.framework.localization.CurrencyFromCountryProvider;
 import com.commercetools.sunrise.framework.localization.LocaleFromUrlProvider;
 import com.commercetools.sunrise.framework.theme.cms.filebased.FileBasedCmsServiceProvider;
+import com.commercetools.sunrise.framework.theme.engine.TemplateEngine;
 import com.commercetools.sunrise.framework.theme.engine.handlebars.HandlebarsProvider;
+import com.commercetools.sunrise.framework.theme.engine.handlebars.HandlebarsTemplateEngine;
 import com.commercetools.sunrise.framework.theme.i18n.ConfigurableI18nResolverProvider;
 import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
 import com.commercetools.sunrise.framework.viewmodels.content.carts.MiniCartViewModelFactory;
@@ -71,11 +73,12 @@ public class Module extends AbstractModule {
         bind(CategoryTree.class).toProvider(CachedCategoryTreeProvider.class);
 
         // Binding for all template related, such as the engine, CMS and i18n
-        bind(CmsService.class)
-                .toProvider(FileBasedCmsServiceProvider.class)
-                .in(Singleton.class);
+        bind(TemplateEngine.class).to(HandlebarsTemplateEngine.class);
         bind(Handlebars.class)
                 .toProvider(HandlebarsProvider.class)
+                .in(Singleton.class);
+        bind(CmsService.class)
+                .toProvider(FileBasedCmsServiceProvider.class)
                 .in(Singleton.class);
         bind(I18nResolverLoader.class)
                 .toProvider(ConfigurableI18nResolverProvider.class)

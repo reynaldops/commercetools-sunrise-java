@@ -11,7 +11,7 @@ import java.util.Locale;
 
 import static java.util.Arrays.asList;
 
-public class HandlebarsContextSettingsImpl implements HandlebarsContextSettings {
+final class HandlebarsContextSettingsImpl implements HandlebarsContextSettings {
 
     private final List<Locale> locales;
     private final PlayJavaFormResolver playJavaFormResolver;

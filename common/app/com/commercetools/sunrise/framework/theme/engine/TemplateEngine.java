@@ -1,16 +1,13 @@
 package com.commercetools.sunrise.framework.theme.engine;
 
 import com.commercetools.sunrise.cms.CmsPage;
-import com.commercetools.sunrise.framework.theme.engine.handlebars.HandlebarsTemplateEngine;
 import com.commercetools.sunrise.framework.viewmodels.PageData;
-import com.google.inject.ImplementedBy;
 
 import javax.annotation.Nullable;
 
 /**
  * Service that provides HTML pages, using some sort of template engine.
  */
-@ImplementedBy(HandlebarsTemplateEngine.class)
 @FunctionalInterface
 public interface TemplateEngine {
 
