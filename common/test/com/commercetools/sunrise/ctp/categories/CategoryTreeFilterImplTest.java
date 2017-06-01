@@ -24,12 +24,12 @@ public class CategoryTreeFilterImplTest {
     private static PagedQueryResult<CategoryWithProductCount> categoriesWithProductCountQueryResult = readCtpObject("categorytree/categoriesWithProductCountQueryResult.json", CategoriesWithProductCountQuery.resultTypeReference());
 
     private SphereClient sphereClient;
-    private CategorySettings configuration;
+    private CategoriesSettings configuration;
     private CategoryTree categoryTree;
 
     @Before
     public void setUp() throws Exception {
-        this.configuration = mock(CategorySettings.class);
+        this.configuration = mock(CategoriesSettings.class);
         this.sphereClient = mock(SphereClient.class);
         when(sphereClient.execute(any(CategoriesWithProductCountQuery.class))).thenReturn(completedFuture(categoriesWithProductCountQueryResult));
         this.categoryTree = CategoryTree.of(categoryList);

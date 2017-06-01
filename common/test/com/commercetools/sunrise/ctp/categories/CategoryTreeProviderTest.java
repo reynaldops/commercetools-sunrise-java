@@ -24,11 +24,11 @@ public class CategoryTreeProviderTest {
     private static PagedQueryResult<Category> categoryQueryResult = JsonUtils.readCtpObject("categorytree/providerCategoryQueryResult.json", CategoryQuery.resultTypeReference());
 
     private SphereClient sphereClient;
-    private CategorySettings configuration;
+    private CategoriesSettings configuration;
 
     @Before
     public void setUp() throws Exception {
-        this.configuration = mock(CategorySettings.class);
+        this.configuration = mock(CategoriesSettings.class);
         this.sphereClient = mock(SphereClient.class);
         when(sphereClient.execute(any(CategoryQuery.class))).thenReturn(completedFuture(categoryQueryResult));
     }

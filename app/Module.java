@@ -1,6 +1,6 @@
 import com.commercetools.sunrise.cms.CmsService;
 import com.commercetools.sunrise.ctp.categories.CachedCategoryTreeProvider;
-import com.commercetools.sunrise.ctp.categories.CategorySettings;
+import com.commercetools.sunrise.ctp.categories.CategoriesSettings;
 import com.commercetools.sunrise.ctp.categories.NavigationCategoryTree;
 import com.commercetools.sunrise.ctp.categories.NewCategoryTree;
 import com.commercetools.sunrise.framework.controllers.metrics.SimpleMetricsSphereClientProvider;
@@ -111,7 +111,7 @@ public class Module extends AbstractModule {
     @Provides
     @RequestScoped
     @NavigationCategoryTree
-    private CategoryTree provideNavigationCategoryTree(final CategorySettings configuration, final CategoryTree categoryTree) {
+    private CategoryTree provideNavigationCategoryTree(final CategoriesSettings configuration, final CategoryTree categoryTree) {
         return configuration.navigationExternalId()
                 .flatMap(categoryTree::findByExternalId)
                 .map(categoryTree::findChildren)
@@ -122,7 +122,7 @@ public class Module extends AbstractModule {
     @Provides
     @RequestScoped
     @NewCategoryTree
-    private CategoryTree provideNewCategoryTree(final CategorySettings configuration, final CategoryTree categoryTree) {
+    private CategoryTree provideNewCategoryTree(final CategoriesSettings configuration, final CategoryTree categoryTree) {
         return configuration.newExtId()
                 .flatMap(categoryTree::findByExternalId)
                 .map(categoryTree::findChildren)

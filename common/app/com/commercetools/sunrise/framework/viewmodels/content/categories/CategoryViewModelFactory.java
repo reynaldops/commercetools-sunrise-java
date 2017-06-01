@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.framework.viewmodels.content.categories;
 
-import com.commercetools.sunrise.ctp.categories.CategorySettings;
+import com.commercetools.sunrise.ctp.categories.CategoriesSettings;
 import com.commercetools.sunrise.ctp.categories.NavigationCategoryTree;
 import com.commercetools.sunrise.ctp.categories.SpecialCategorySettings;
 import com.commercetools.sunrise.framework.injection.RequestScoped;
@@ -17,20 +17,20 @@ import static java.util.stream.Collectors.toList;
 @RequestScoped
 public class CategoryViewModelFactory extends SimpleViewModelFactory<CategoryViewModel, Category> {
 
-    private final CategorySettings categorySettings;
+    private final CategoriesSettings categoriesSettings;
     private final CategoryTree categoryTree;
     private final ProductReverseRouter productReverseRouter;
 
     @Inject
-    public CategoryViewModelFactory(final CategorySettings categorySettings, @NavigationCategoryTree final CategoryTree categoryTree,
+    public CategoryViewModelFactory(final CategoriesSettings categoriesSettings, @NavigationCategoryTree final CategoryTree categoryTree,
                                     final ProductReverseRouter productReverseRouter) {
-        this.categorySettings = categorySettings;
+        this.categoriesSettings = categoriesSettings;
         this.categoryTree = categoryTree;
         this.productReverseRouter = productReverseRouter;
     }
 
-    protected final CategorySettings getCategorySettings() {
-        return categorySettings;
+    protected final CategoriesSettings getCategoriesSettings() {
+        return categoriesSettings;
     }
 
     protected final CategoryTree getCategoryTree() {
@@ -71,7 +71,7 @@ public class CategoryViewModelFactory extends SimpleViewModelFactory<CategoryVie
     }
 
     protected void fillSale(final CategoryViewModel viewModel, final Category category) {
-        final boolean isSale = categorySettings.specialCategories().stream()
+        final boolean isSale = categoriesSettings.specialCategories().stream()
                 .filter(SpecialCategorySettings::isSale)
                 .anyMatch(specialCategory -> specialCategory.externalId().equals(category.getExternalId()));
         viewModel.setSale(isSale);

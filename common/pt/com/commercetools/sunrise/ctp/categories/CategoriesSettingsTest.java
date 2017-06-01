@@ -8,7 +8,7 @@ import play.test.WithApplication;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CategorySettingsTest extends WithApplication {
+public class CategoriesSettingsTest extends WithApplication {
 
     @Override
     protected Application provideApplication() {
@@ -19,7 +19,7 @@ public class CategorySettingsTest extends WithApplication {
 
     @Test
     public void fallbacksToDefaultValues() throws Exception {
-        final CategorySettings configuration = app.injector().instanceOf(CategorySettings.class);
+        final CategoriesSettings configuration = app.injector().instanceOf(CategoriesSettings.class);
         assertThat(configuration.cacheExpiration())
                 .as("Cache expiration")
                 .isEmpty();

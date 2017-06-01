@@ -11,11 +11,11 @@ import javax.inject.Singleton;
 public final class CachedCategoryTreeProvider implements Provider<CategoryTree> {
 
     private final CacheApi cacheApi;
-    private final CategorySettings configuration;
+    private final CategoriesSettings configuration;
     private final CategoryTreeProvider categoryTreeProvider;
 
     @Inject
-    CachedCategoryTreeProvider(final CacheApi cacheApi, final CategorySettings configuration,
+    CachedCategoryTreeProvider(final CacheApi cacheApi, final CategoriesSettings configuration,
                                final CategoryTreeProvider categoryTreeProvider) {
         this.cacheApi = cacheApi;
         this.configuration = configuration;

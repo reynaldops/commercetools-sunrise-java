@@ -14,11 +14,11 @@ import static java.util.stream.Collectors.toList;
 
 class CategoryTreeFilterImpl implements CategoryTreeFilter {
 
-    private final CategorySettings configuration;
+    private final CategoriesSettings configuration;
     private final SphereClient sphereClient;
 
     @Inject
-    CategoryTreeFilterImpl(final CategorySettings configuration, final SphereClient sphereClient) {
+    CategoryTreeFilterImpl(final CategoriesSettings configuration, final SphereClient sphereClient) {
         this.configuration = configuration;
         this.sphereClient = sphereClient;
     }

@@ -23,12 +23,12 @@ public final class CategoryTreeProvider implements Provider<CategoryTree> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryTreeProvider.class);
 
-    private final CategorySettings configuration;
+    private final CategoriesSettings configuration;
     private final CategoryTreeFilter categoryTreeFilter;
     private final SphereClient sphereClient;
 
     @Inject
-    CategoryTreeProvider(final CategorySettings configuration, final CategoryTreeFilter categoryTreeFilter,
+    CategoryTreeProvider(final CategoriesSettings configuration, final CategoryTreeFilter categoryTreeFilter,
                          final SphereClient sphereClient) {
         this.categoryTreeFilter = categoryTreeFilter;
         this.configuration = configuration;
