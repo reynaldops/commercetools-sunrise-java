@@ -10,7 +10,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class I18NResolverLoaderTest {
+public class I18nResolverLoaderTestForce {
 
     private static final I18nIdentifier I18N_IDENTIFIER = new I18nIdentifierFactory().create("foo", "bar");
 
