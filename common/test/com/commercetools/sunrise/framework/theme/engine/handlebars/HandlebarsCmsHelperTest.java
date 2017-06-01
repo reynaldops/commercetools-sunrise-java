@@ -1,7 +1,7 @@
 package com.commercetools.sunrise.framework.theme.engine.handlebars;
 
 import com.commercetools.sunrise.cms.CmsPage;
-import com.commercetools.sunrise.framework.theme.i18n.TestableI18nResolverLoaderForce;
+import com.commercetools.sunrise.framework.theme.i18n.TestableI18nResolverLoader;
 import com.commercetools.sunrise.framework.viewmodels.PageData;
 import com.commercetools.sunrise.framework.theme.engine.TemplateContext;
 import com.commercetools.sunrise.framework.theme.engine.TemplateEngine;
@@ -48,7 +48,7 @@ public class HandlebarsCmsHelperTest {
     }
 
     private static TemplateEngine handlebarsTemplateEngine() {
-        final TestableI18nResolverLoaderForce i18nResolver = new TestableI18nResolverLoaderForce(emptyMap());
+        final TestableI18nResolverLoader i18nResolver = new TestableI18nResolverLoader(emptyMap());
         final List<TemplateLoader> templateLoaders = singletonList(new ClassPathTemplateLoader("/templates/cmsHelper"));
         final Handlebars handlebars = HandlebarsFactory.create(templateLoaders, i18nResolver, new I18nIdentifierFactory());
         return HandlebarsTemplateEngine.of(handlebars, new HandlebarsContextFactory(new PlayJavaFormResolver(msg -> msg)));

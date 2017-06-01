@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class TestableI18nResolverLoaderForce implements I18nResolverLoader {
+public class TestableI18nResolverLoader implements I18nResolverLoader {
 
     private final Map<String, String> i18nMap;
 
-    public TestableI18nResolverLoaderForce(final Map<String, String> i18nMap) {
+    public TestableI18nResolverLoader(final Map<String, String> i18nMap) {
         this.i18nMap = i18nMap;
     }
 

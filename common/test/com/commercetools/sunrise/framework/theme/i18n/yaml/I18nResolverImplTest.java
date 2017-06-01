@@ -13,7 +13,7 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class I18nResolverImplTestForce {
+public class I18nResolverImplTest {
     private static final I18nResolverLoaderImpl YAML_I18N_RESOLVER = yamlI18nResolver();
 
     @Test

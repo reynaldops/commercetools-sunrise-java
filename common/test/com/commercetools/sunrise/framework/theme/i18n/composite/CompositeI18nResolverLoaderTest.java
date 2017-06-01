@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CompositeI18nResolverLoaderTestForce {
+public class CompositeI18nResolverLoaderTest {
 
     public static final I18nResolverLoader I18N_RETURNS_ALWAYS_EMPTY = (locale, i18nIdentifier, hashArgs) -> Optional.empty();
 
