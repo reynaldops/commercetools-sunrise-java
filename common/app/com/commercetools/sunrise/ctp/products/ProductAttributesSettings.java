@@ -6,8 +6,8 @@ import play.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
-@ImplementedBy(ProductAttributeSettingsImpl.class)
-public interface ProductAttributeSettings {
+@ImplementedBy(ProductAttributesSettingsImpl.class)
+public interface ProductAttributesSettings {
 
     /**
      * @return the list of the displayed attributes for the product
@@ -37,8 +37,8 @@ public interface ProductAttributeSettings {
         return selectableAttributes;
     }
 
-    static ProductAttributeSettings of(final Configuration globalConfig, final String configPath) {
-        return new ProductAttributeSettingsImpl(globalConfig, configPath);
+    static ProductAttributesSettings of(final Configuration globalConfig, final String configPath) {
+        return new ProductAttributesSettingsImpl(globalConfig, configPath);
     }
 }
 

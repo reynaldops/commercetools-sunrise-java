@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.productcatalog.productdetail.viewmodels;
 
-import com.commercetools.sunrise.ctp.products.ProductAttributeSettings;
+import com.commercetools.sunrise.ctp.products.ProductAttributesSettings;
 import com.commercetools.sunrise.framework.viewmodels.content.products.AttributeWithProductType;
 import com.commercetools.sunrise.framework.viewmodels.forms.SelectableViewModelFactory;
 import com.commercetools.sunrise.framework.viewmodels.formatters.AttributeFormatter;
@@ -21,14 +21,14 @@ import static java.util.stream.Collectors.toList;
 public class SelectableProductAttributeViewModelFactory extends SelectableViewModelFactory<SelectableProductAttributeViewModel, List<ProductVariant>, AttributeWithProductType> {
 
     private final AttributeFormatter attributeFormatter;
-    private final ProductAttributeSettings productAttributeSettings;
+    private final ProductAttributesSettings productAttributesSettings;
     private final ProductAttributeFormSelectableOptionViewModelFactory productAttributeFormSelectableOptionViewModelFactory;
 
     @Inject
-    public SelectableProductAttributeViewModelFactory(final AttributeFormatter attributeFormatter, final ProductAttributeSettings productAttributeSettings,
+    public SelectableProductAttributeViewModelFactory(final AttributeFormatter attributeFormatter, final ProductAttributesSettings productAttributesSettings,
                                                  final ProductAttributeFormSelectableOptionViewModelFactory productAttributeFormSelectableOptionViewModelFactory) {
         this.attributeFormatter = attributeFormatter;
-        this.productAttributeSettings = productAttributeSettings;
+        this.productAttributesSettings = productAttributesSettings;
         this.productAttributeFormSelectableOptionViewModelFactory = productAttributeFormSelectableOptionViewModelFactory;
     }
 
@@ -36,8 +36,8 @@ public class SelectableProductAttributeViewModelFactory extends SelectableViewMo
         return attributeFormatter;
     }
 
-    protected final ProductAttributeSettings getProductAttributeSettings() {
-        return productAttributeSettings;
+    protected final ProductAttributesSettings getProductAttributesSettings() {
+        return productAttributesSettings;
     }
 
     protected final ProductAttributeFormSelectableOptionViewModelFactory getProductAttributeFormSelectableOptionViewModelFactory() {
@@ -56,7 +56,7 @@ public class SelectableProductAttributeViewModelFactory extends SelectableViewMo
 
     public final List<SelectableProductAttributeViewModel> createList(final ProductWithVariant productWithVariant) {
         final Reference<ProductType> productTypeRef = productWithVariant.getProduct().getProductType();
-        return productAttributeSettings.selectable().stream()
+        return productAttributesSettings.selectable().stream()
                 .map(productWithVariant.getVariant()::getAttribute)
                 .filter(Objects::nonNull)
                 .map(attribute -> create(productWithVariant.getProduct().getAllVariants(), AttributeWithProductType.of(attribute, productTypeRef)))
@@ -86,7 +86,7 @@ public class SelectableProductAttributeViewModelFactory extends SelectableViewMo
     }
 
     protected void fillReload(final SelectableProductAttributeViewModel viewModel, final List<ProductVariant> variants, final AttributeWithProductType selectedAttribute) {
-        viewModel.setReload(productAttributeSettings.primarySelectable().contains(selectedAttribute.getAttribute().getName()));
+        viewModel.setReload(productAttributesSettings.primarySelectable().contains(selectedAttribute.getAttribute().getName()));
     }
 
     protected void fillList(final SelectableProductAttributeViewModel viewModel, final List<ProductVariant> variants, final AttributeWithProductType selectedAttribute) {
@@ -110,7 +110,7 @@ public class SelectableProductAttributeViewModelFactory extends SelectableViewMo
 
     private Map<String, List<String>> createAllowedAttributeCombinations(final AttributeWithProductType fixedAttribute, final List<ProductVariant> variants) {
         final Map<String, List<String>> attrCombination = new HashMap<>();
-        productAttributeSettings.selectable().stream()
+        productAttributesSettings.selectable().stream()
                 .filter(enabledAttrKey -> !fixedAttribute.getAttribute().getName().equals(enabledAttrKey))
                 .forEach(enabledAttrKey -> {
                     final List<String> allowedAttrValues = attributeCombination(enabledAttrKey, fixedAttribute, variants);

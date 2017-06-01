@@ -9,22 +9,22 @@ import javax.inject.Inject;
 
 public final class SphereClientConfigProvider implements Provider<SphereClientConfig> {
 
-    private final Configuration clientConfiguration;
+    private final Configuration configuration;
 
     @Inject
-    SphereClientConfigProvider(final Configuration configuration) {
-        this.clientConfiguration = configuration.getConfig("ctp.client");
+    SphereClientConfigProvider(final Configuration globalConfig) {
+        this.configuration = globalConfig.getConfig("ctp.client");
     }
 
     @Override
     public SphereClientConfig get() {
         try {
-            final String projectKey = clientConfiguration.getString("projectKey");
-            final String clientId = clientConfiguration.getString("clientId");
-            final String clientSecret = clientConfiguration.getString("clientSecret");
+            final String projectKey = configuration.getString("projectKey");
+            final String clientId = configuration.getString("clientId");
+            final String clientSecret = configuration.getString("clientSecret");
             return SphereClientConfig.of(projectKey, clientId, clientSecret)
-                    .withApiUrl(clientConfiguration.getString("apiUrl"))
-                    .withAuthUrl(clientConfiguration.getString("authUrl"));
+                    .withApiUrl(configuration.getString("apiUrl"))
+                    .withAuthUrl(configuration.getString("authUrl"));
         } catch (IllegalArgumentException e) {
             throw new SunriseConfigurationException("Could not initialize SphereClientConfig", "ctp.client", e);
         }
