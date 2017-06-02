@@ -12,31 +12,25 @@ import java.util.Optional;
 final class I18nResolverImpl implements I18nResolver {
 
     private final List<Locale> locales;
-    private final List<I18nResolverLoader> resolverLoaders;
+    private final I18nContent i18nContent;
     private final I18nIdentifierFactory i18nIdentifierFactory;
 
     @Inject
     I18nResolverImpl(final UserLanguage userLanguage, final I18nSettings i18nSettings,
                      final I18nIdentifierFactory i18nIdentifierFactory) {
-        this(userLanguage.locales(), i18nSettings.resolverLoaders(), i18nIdentifierFactory);
+        this(userLanguage.locales(), i18nSettings, i18nIdentifierFactory);
     }
 
-    I18nResolverImpl(final List<Locale> locales, final List<I18nResolverLoader> resolverLoaders,
+    I18nResolverImpl(final List<Locale> locales, final I18nSettings i18nSettings,
                      final I18nIdentifierFactory i18nIdentifierFactory) {
         this.locales = locales;
-        this.resolverLoaders = resolverLoaders;
+        this.i18nContent = i18nSettings.i18nContent();
         this.i18nIdentifierFactory = i18nIdentifierFactory;
     }
 
     @Override
-    public Optional<String> resolve(final String i18nIdentifierAsString) {
+    public Optional<String> find(final String i18nIdentifierAsString) {
         final I18nIdentifier i18nIdentifier = i18nIdentifierFactory.create(i18nIdentifierAsString);
-        for (I18nResolverLoader i18nResolverLoader : resolverLoaders) {
-            final Optional<String> message = i18nResolverLoader.get(locales, i18nIdentifier);
-            if (message.isPresent()) {
-                return message;
-            }
-        }
-        return Optional.empty();
+        return i18nContent.find(locales, i18nIdentifier);
     }
 }

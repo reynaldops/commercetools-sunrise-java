@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.framework.theme.engine.handlebars;
 
-import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
+import com.commercetools.sunrise.framework.theme.i18n.I18nContent;
 import com.commercetools.sunrise.framework.viewmodels.PageData;
 import com.commercetools.sunrise.framework.theme.engine.TemplateContext;
 import com.commercetools.sunrise.framework.theme.engine.TemplateEngine;
@@ -25,7 +25,7 @@ public class HandlebarsTemplateEngineTest {
 
     private static final TemplateLoader DEFAULT_LOADER = new ClassPathTemplateLoader("/templates");
     private static final TemplateLoader OVERRIDE_LOADER = new ClassPathTemplateLoader("/templates/override");
-    private static final I18nResolverLoader I18N_MESSAGES = ((locale, i18nIdentifier, hashArgs) -> Optional.empty());
+    private static final I18nContent I18N_MESSAGES = ((locale, i18nIdentifier, hashArgs) -> Optional.empty());
     private static final List<Locale> LOCALES = emptyList();
 
     @Test

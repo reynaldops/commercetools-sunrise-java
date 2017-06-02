@@ -1,12 +1,10 @@
 package com.commercetools.sunrise.framework.theme.i18n;
 
-import io.sphere.sdk.models.Base;
-
 import javax.annotation.Nullable;
 
 import static org.apache.commons.lang3.StringUtils.split;
 
-public class I18nIdentifierFactory extends Base {
+public class I18nIdentifierFactory {
 
     private static final String DEFAULT_BUNDLE = "main";
 

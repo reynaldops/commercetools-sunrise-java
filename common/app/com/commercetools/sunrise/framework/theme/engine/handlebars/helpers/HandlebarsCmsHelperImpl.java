@@ -1,7 +1,6 @@
 package com.commercetools.sunrise.framework.theme.engine.handlebars.helpers;
 
 import com.commercetools.sunrise.cms.CmsPage;
-import com.commercetools.sunrise.framework.SunriseModel;
 import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Options;
 
@@ -10,7 +9,7 @@ import java.util.Optional;
 
 import static com.commercetools.sunrise.framework.theme.engine.handlebars.HandlebarsContextKeys.CMS_PAGE_KEY;
 
-final class HandlebarsCmsHelperImpl extends SunriseModel implements HandlebarsCmsHelper {
+final class HandlebarsCmsHelperImpl implements HandlebarsCmsHelper {
 
     @Override
     public CharSequence apply(final String context, final Options options) throws IOException {

@@ -1,4 +1,4 @@
-package com.commercetools.sunrise.framework.theme.i18n.yaml;
+package com.commercetools.sunrise.framework.theme.i18n;
 
 import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoaderImpl;
 import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifier;

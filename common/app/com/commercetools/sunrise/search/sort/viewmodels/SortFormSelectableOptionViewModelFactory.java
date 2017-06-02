@@ -40,7 +40,7 @@ public class SortFormSelectableOptionViewModelFactory extends SelectableViewMode
     }
 
     protected void fillLabel(final SortFormSelectableOptionViewModel viewModel, final SortFormOption option, @Nullable final String selectedOptionValue) {
-        viewModel.setLabel(i18nResolver.resolveOrKey(option.getFieldLabel()));
+        viewModel.setLabel(i18nResolver.getOrKey(option.getFieldLabel()));
     }
 
     protected void fillValue(final SortFormSelectableOptionViewModel viewModel, final SortFormOption option, @Nullable final String selectedOptionValue) {

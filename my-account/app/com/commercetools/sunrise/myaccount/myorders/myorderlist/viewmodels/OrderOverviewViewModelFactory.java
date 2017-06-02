@@ -90,7 +90,7 @@ public class OrderOverviewViewModelFactory extends SimpleViewModelFactory<OrderO
         viewModel.setShipping(Optional.ofNullable(order.getShipmentState())
                 .map(state -> {
                     final String stateName = state.name();
-                    return i18nResolver.resolve("main:order.shippingStatus." + enumToCamelCase(stateName))
+                    return i18nResolver.find("main:order.shippingStatus." + enumToCamelCase(stateName))
                             .orElse(stateName);
                 }).orElse("-"));
     }
@@ -99,7 +99,7 @@ public class OrderOverviewViewModelFactory extends SimpleViewModelFactory<OrderO
         viewModel.setPaymentStatus(Optional.ofNullable(order.getPaymentState())
                 .map(state -> {
                     final String stateName = state.name();
-                    return i18nResolver.resolve("main:order.paymentStatus." + enumToCamelCase(stateName))
+                    return i18nResolver.find("main:order.paymentStatus." + enumToCamelCase(stateName))
                             .orElse(stateName);
                 }).orElse("-"));
     }

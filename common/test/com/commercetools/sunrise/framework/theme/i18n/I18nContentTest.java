@@ -10,25 +10,25 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class I18nResolverLoaderTest {
+public class I18nContentTest {
 
     private static final I18nIdentifier I18N_IDENTIFIER = new I18nIdentifierFactory().create("foo", "bar");
 
     @Test
     public void resolvesTranslation() throws Exception {
-        final Optional<String> message = i18nOnlyForEnglish().get(asList(Locale.GERMAN, Locale.ENGLISH), I18N_IDENTIFIER);
+        final Optional<String> message = i18nOnlyForEnglish().find(asList(Locale.GERMAN, Locale.ENGLISH), I18N_IDENTIFIER);
         assertThat(message).contains("some sentence");
     }
 
     @Test
     public void emptyWhenNoLanguageFound() throws Exception {
-        final Optional<String> message = i18nOnlyForEnglish().get(singletonList(Locale.GERMAN), I18N_IDENTIFIER);
+        final Optional<String> message = i18nOnlyForEnglish().find(singletonList(Locale.GERMAN), I18N_IDENTIFIER);
         assertThat(message).isEmpty();
     }
 
     @Test
     public void emptyWhenNoLanguageDefined() throws Exception {
-        final Optional<String> message = i18nOnlyForEnglish().get(emptyList(), I18N_IDENTIFIER);
+        final Optional<String> message = i18nOnlyForEnglish().find(emptyList(), I18N_IDENTIFIER);
         assertThat(message).isEmpty();
     }
 
@@ -63,7 +63,7 @@ public class I18nResolverLoaderTest {
         assertThat(message).isEqualTo("some text");
     }
 
-    private I18nResolverLoader i18nOnlyForEnglish() {
+    private I18nContent i18nOnlyForEnglish() {
         return (locales, i18nIdentifier, hashArgs) ->
                 locales.contains(Locale.ENGLISH) ? Optional.of("some sentence") : Optional.empty();
     }

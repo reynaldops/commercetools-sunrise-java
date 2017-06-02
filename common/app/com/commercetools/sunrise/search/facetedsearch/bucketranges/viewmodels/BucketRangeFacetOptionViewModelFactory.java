@@ -37,7 +37,7 @@ public class BucketRangeFacetOptionViewModelFactory extends AbstractFacetOptionV
 
     @Override
     protected void fillLabel(final FacetOptionViewModel viewModel, final RangeStats stats, final BucketRangeFacetedSearchFormOption option, @Nullable final List<String> selectedValues) {
-        viewModel.setLabel(i18nResolver.resolveOrKey(option.getFieldLabel()));
+        viewModel.setLabel(i18nResolver.getOrKey(option.getFieldLabel()));
     }
 
     @Override

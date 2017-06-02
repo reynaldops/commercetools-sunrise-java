@@ -1,11 +1,11 @@
 package com.commercetools.sunrise.framework.theme.engine.handlebars;
 
+import com.commercetools.sunrise.framework.theme.i18n.I18nContent;
 import com.commercetools.sunrise.framework.viewmodels.PageData;
 import com.commercetools.sunrise.framework.theme.engine.TemplateContext;
 import com.commercetools.sunrise.framework.theme.engine.TemplateEngine;
 import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifierFactory;
-import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
-import com.commercetools.sunrise.framework.theme.i18n.TestableI18nResolverLoader;
+import com.commercetools.sunrise.framework.theme.i18n.TestableI18nContent;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
@@ -70,8 +70,8 @@ public class HandlebarsI18nHelperTest {
         return templateEngine.render(templateName, templateContext);
     }
 
-    private static I18nResolverLoader i18nResolver(final Map<String, String> i18nMap) {
-        return new TestableI18nResolverLoader(i18nMap);
+    private static I18nContent i18nResolver(final Map<String, String> i18nMap) {
+        return new TestableI18nContent(i18nMap);
     }
 
     private static Map<String, String> defaultI18nMap() {

@@ -11,7 +11,7 @@ import static java.util.Collections.emptyMap;
  * Resolves i18n messages.
  */
 @FunctionalInterface
-public interface I18nResolverLoader {
+public interface I18nContent {
 
     /**
      * Resolves i18n message identified by a bundle and a key for the first found given locale.
@@ -20,7 +20,7 @@ public interface I18nResolverLoader {
      * @param hashArgs list of hash arguments
      * @return the resolved message in the first found given language, or absent if it could not be found
      */
-    Optional<String> get(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs);
+    Optional<String> find(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs);
 
     /**
      * Resolves i18n message identified by a bundle and a key for the first found given locale.
@@ -28,8 +28,8 @@ public interface I18nResolverLoader {
      * @param i18nIdentifier identifier of the i18n message
      * @return the resolved message in the first found given language, or absent if it could not be found
      */
-    default Optional<String> get(final List<Locale> locales, final I18nIdentifier i18nIdentifier) {
-        return get(locales, i18nIdentifier, emptyMap());
+    default Optional<String> find(final List<Locale> locales, final I18nIdentifier i18nIdentifier) {
+        return find(locales, i18nIdentifier, emptyMap());
     }
 
     /**
@@ -40,7 +40,7 @@ public interface I18nResolverLoader {
      * @return the resolved message in the first found given language, or empty string if it could not be found
      */
     default String getOrEmpty(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs) {
-        return get(locales, i18nIdentifier, hashArgs).orElse("");
+        return find(locales, i18nIdentifier, hashArgs).orElse("");
     }
 
     /**
@@ -50,7 +50,7 @@ public interface I18nResolverLoader {
      * @return the resolved message in the any of the given languages, or empty string if it could not be found
      */
     default String getOrEmpty(final List<Locale> locales, final I18nIdentifier i18nIdentifier) {
-        return get(locales, i18nIdentifier).orElse("");
+        return find(locales, i18nIdentifier).orElse("");
     }
 
     /**
@@ -61,7 +61,7 @@ public interface I18nResolverLoader {
      * @return the resolved message in the first found given language, or the message key if it could not be found
      */
     default String getOrKey(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs) {
-        return get(locales, i18nIdentifier, hashArgs).orElse(i18nIdentifier.getMessageKey());
+        return find(locales, i18nIdentifier, hashArgs).orElse(i18nIdentifier.getMessageKey());
     }
 
     /**
@@ -71,14 +71,14 @@ public interface I18nResolverLoader {
      * @return the resolved message in the any of the given languages, or the message key if it could not be found
      */
     default String getOrKey(final List<Locale> locales, final I18nIdentifier i18nIdentifier) {
-        return get(locales, i18nIdentifier).orElse(i18nIdentifier.getMessageKey());
+        return find(locales, i18nIdentifier).orElse(i18nIdentifier.getMessageKey());
     }
 
-    static String buildKey(final String languageTag, final String bundle) {
-        return languageTag + "/" + bundle;
+    static I18nContent of(final String path, final List<Locale> locales, final List<String> bundles) {
+        return new I18nContentImpl(path, locales, bundles);
     }
 
-    static I18nResolverLoader of(final Map<String, Map> map) {
-        return new I18nResolverLoaderImpl(map);
+    static I18nContent ofList(final List<I18nContent> i18nContentList) {
+        return new CompositeI18nContent(i18nContentList);
     }
 }

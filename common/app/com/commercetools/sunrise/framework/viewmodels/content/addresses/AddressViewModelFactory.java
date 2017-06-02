@@ -56,7 +56,7 @@ public class AddressViewModelFactory extends SimpleViewModelFactory<AddressViewM
 
     protected void fillTitle(final AddressViewModel viewModel, @Nullable final Address address) {
         if (address != null && address.getTitle() != null) {
-            viewModel.setTitle(i18nResolver.resolveOrKey(address.getTitle()));
+            viewModel.setTitle(i18nResolver.getOrKey(address.getTitle()));
         }
     }
 

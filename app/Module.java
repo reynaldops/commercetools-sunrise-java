@@ -13,7 +13,7 @@ import com.commercetools.sunrise.framework.theme.engine.TemplateEngine;
 import com.commercetools.sunrise.framework.theme.engine.handlebars.HandlebarsProvider;
 import com.commercetools.sunrise.framework.theme.engine.handlebars.HandlebarsTemplateEngine;
 import com.commercetools.sunrise.framework.theme.i18n.ConfigurableI18nResolverProvider;
-import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
+import com.commercetools.sunrise.framework.theme.i18n.I18nContent;
 import com.commercetools.sunrise.framework.viewmodels.content.carts.MiniCartViewModelFactory;
 import com.commercetools.sunrise.httpauth.HttpAuthentication;
 import com.commercetools.sunrise.httpauth.basic.BasicAuthenticationProvider;
@@ -80,7 +80,7 @@ public class Module extends AbstractModule {
         bind(CmsService.class)
                 .toProvider(FileBasedCmsServiceProvider.class)
                 .in(Singleton.class);
-        bind(I18nResolverLoader.class)
+        bind(I18nContent.class)
                 .toProvider(ConfigurableI18nResolverProvider.class)
                 .in(Singleton.class);
 

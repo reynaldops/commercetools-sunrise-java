@@ -6,16 +6,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class TestableI18nResolverLoader implements I18nResolverLoader {
+public class TestableI18nContent implements I18nContent {
 
     private final Map<String, String> i18nMap;
 
-    public TestableI18nResolverLoader(final Map<String, String> i18nMap) {
+    public TestableI18nContent(final Map<String, String> i18nMap) {
         this.i18nMap = i18nMap;
     }
 
     @Override
-    public Optional<String> get(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs) {
+    public Optional<String> find(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs) {
         final String mapKey = String.format("%s/%s:%s", locales.get(0), i18nIdentifier.getBundle(), i18nIdentifier.getMessageKey());
         final String message = i18nMap.get(mapKey);
         final String parameters = hashArgs.entrySet().stream()

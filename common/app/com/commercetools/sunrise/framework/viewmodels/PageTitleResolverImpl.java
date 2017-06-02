@@ -18,6 +18,6 @@ final class PageTitleResolverImpl implements PageTitleResolver {
 
     @Override
     public Optional<String> find(final String key) {
-        return i18nResolver.resolve(key);
+        return i18nResolver.find(key);
     }
 }

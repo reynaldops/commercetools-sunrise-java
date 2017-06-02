@@ -1,6 +1,6 @@
 package com.commercetools.sunrise.framework.theme.i18n;
 
-import io.sphere.sdk.models.Base;
+import com.commercetools.sunrise.framework.SunriseModel;
 
 /**
  * i18n Identifier, consisting of the message key and the bundle.
@@ -10,7 +10,7 @@ import io.sphere.sdk.models.Base;
  *
  * @see I18nIdentifier
  */
-public final class I18nIdentifier extends Base {
+public final class I18nIdentifier extends SunriseModel {
 
     private final String bundle;
     private final String messageKey;
@@ -30,9 +30,5 @@ public final class I18nIdentifier extends Base {
 
     public static I18nIdentifier of(final String bundle, final String key) {
         return new I18nIdentifier(bundle, key);
-    }
-
-    public static String bundleWithKey(final String bundle, final String key) {
-        return bundle + ":" + key;
     }
 }

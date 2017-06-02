@@ -1,8 +1,7 @@
 package com.commercetools.sunrise.framework.theme.cms.filebased;
 
 import com.commercetools.sunrise.cms.CmsPage;
-import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
-import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoaderImpl;
+import com.commercetools.sunrise.framework.theme.i18n.I18nContent;
 import org.junit.Test;
 
 import java.util.List;
@@ -52,8 +51,8 @@ public class FileBasedCmsPageTest {
     }
 
     private void testCms(final Locale locale, final String pageKey, final String fieldName, final Consumer<Optional<String>> test) throws Exception {
-        final I18nResolverLoader i18nResolverLoader = I18nResolverLoaderImpl.of("cms", SUPPORTED_LOCALES, AVAILABLE_BUNDLES);
-        final FileBasedCmsService cmsService = FileBasedCmsService.of(i18nResolverLoader);
+        final I18nContent i18nContent = I18nContent.of("cms", SUPPORTED_LOCALES, AVAILABLE_BUNDLES);
+        final FileBasedCmsService cmsService = FileBasedCmsService.of(i18nContent);
         final Optional<CmsPage> page = cmsService.page(pageKey, singletonList(locale)).toCompletableFuture().join();
         test.accept(page.flatMap(p -> p.field(fieldName)));
     }

@@ -17,6 +17,6 @@ final class ErrorFormatterImpl implements ErrorFormatter {
 
     @Override
     public String format(final String messageKey) {
-        return i18nResolver.resolveOrKey(messageKey);
+        return i18nResolver.getOrKey(messageKey);
     }
 }

@@ -31,7 +31,7 @@ public abstract class AbstractFacetViewModelFactory<M extends FacetViewModel, T 
     }
 
     protected void fillLabel(final M viewModel, final T settings, final F facetResult) {
-        viewModel.setLabel(i18nResolver.resolveOrKey(settings.getFieldLabel()));
+        viewModel.setLabel(i18nResolver.getOrKey(settings.getFieldLabel()));
     }
 
     protected void fillCountHidden(final M viewModel, final T settings, final F facetResult) {

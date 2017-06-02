@@ -40,7 +40,7 @@ public class EntriesPerPageFormSelectableOptionViewModelFactory extends Selectab
     }
 
     protected void fillLabel(final EntriesPerPageFormSelectableOptionViewModel viewModel, final EntriesPerPageFormOption option, @Nullable final String selectedOptionValue) {
-        viewModel.setLabel(i18nResolver.resolveOrKey(option.getFieldLabel()));
+        viewModel.setLabel(i18nResolver.getOrKey(option.getFieldLabel()));
     }
 
     protected void fillValue(final EntriesPerPageFormSelectableOptionViewModel viewModel, final EntriesPerPageFormOption option, @Nullable final String selectedOptionValue) {

@@ -12,27 +12,31 @@ import java.util.Optional;
 import static java.util.Collections.emptyMap;
 
 /**
- * Resolves the i18n messages using the given map.
+ * Resolves the i18n messages from the content of YAML files localed in the given path.
  * Parameters and pluralized forms are supported.
  *
  * For pluralized forms, specify the amount of items as a hash parameter {@code count}.
  * For the plural message, a suffix {@code _plural} must be added to the message key.
- * Notice only pluralization forms similar to English are currently supported (1 is singular, the rest are plural).
+ * Notice that only pluralization forms similar to English are currently supported (1 is singular, the rest are plural).
  */
-final class I18nResolverLoaderImpl extends Base implements I18nResolverLoader {
+final class I18nContentImpl extends Base implements I18nContent {
 
     private final Map<String, Map> map;
 
-    I18nResolverLoaderImpl(final Map<String, Map> map) {
-        this.map = map;
+    I18nContentImpl(final String path, final List<Locale> locales, final List<String> bundles) {
+        this.map = new YamlContentLoader(path).load(locales, bundles);
     }
 
     @Override
-    public Optional<String> get(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs) {
+    public Optional<String> find(final List<Locale> locales, final I18nIdentifier i18nIdentifier, final Map<String, Object> hashArgs) {
         final String message = findPluralizedTranslation(locales, i18nIdentifier, hashArgs)
                 .orElseGet(() -> findFirstTranslation(locales, i18nIdentifier.getBundle(), i18nIdentifier.getMessageKey())
                         .orElse(null));
         return Optional.ofNullable(message).map(resolvedValue -> replaceParameters(resolvedValue, hashArgs));
+    }
+
+    static String buildKey(final String languageTag, final String bundle) {
+        return languageTag + "/" + bundle;
     }
 
     private Optional<String> findPluralizedTranslation(final List<Locale> locales, final I18nIdentifier i18nIdentifier,
@@ -74,7 +78,7 @@ final class I18nResolverLoaderImpl extends Base implements I18nResolverLoader {
     }
 
     private Map getContent(final String bundle, final Locale locale) {
-        final String key = I18nResolverLoader.buildKey(locale.toLanguageTag(), bundle);
+        final String key = buildKey(locale.toLanguageTag(), bundle);
         return map.getOrDefault(key, emptyMap());
     }
 

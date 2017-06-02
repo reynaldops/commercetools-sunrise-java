@@ -1,9 +1,8 @@
 package com.commercetools.sunrise.framework.theme.engine.handlebars.helpers;
 
-import com.commercetools.sunrise.framework.SunriseModel;
-import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifier;
 import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifierFactory;
-import com.commercetools.sunrise.framework.theme.i18n.I18nResolverLoader;
+import com.commercetools.sunrise.framework.theme.i18n.I18nResolver;
+import com.commercetools.sunrise.framework.theme.i18n.I18nSettings;
 import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Options;
 
@@ -16,22 +15,22 @@ import static com.commercetools.sunrise.framework.theme.engine.handlebars.Handle
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
-final class HandlebarsI18nHelperImpl extends SunriseModel implements HandlebarsI18nHelper {
+final class HandlebarsI18nHelperImpl implements HandlebarsI18nHelper {
 
-    private final I18nResolverLoader i18nResolverLoader;
+    private final I18nSettings i18nSettings;
     private final I18nIdentifierFactory i18nIdentifierFactory;
 
     @Inject
-    HandlebarsI18nHelperImpl(final I18nResolverLoader i18nResolverLoader, final I18nIdentifierFactory i18nIdentifierFactory) {
-        this.i18nResolverLoader = i18nResolverLoader;
+    HandlebarsI18nHelperImpl(final I18nSettings i18nSettings, final I18nIdentifierFactory i18nIdentifierFactory) {
+        this.i18nSettings = i18nSettings;
         this.i18nIdentifierFactory = i18nIdentifierFactory;
     }
 
     @Override
     public CharSequence apply(final String context, final Options options) throws IOException {
         final List<Locale> locales = getLocalesFromContext(options.context);
-        final I18nIdentifier i18nIdentifier = i18nIdentifierFactory.create(context);
-        return i18nResolverLoader.getOrEmpty(locales, i18nIdentifier, options.hash);
+        final I18nResolver i18nResolver = I18nResolver.of(locales, i18nSettings, i18nIdentifierFactory);
+        return i18nResolver.getOrEmpty(context);
     }
 
     @SuppressWarnings("unchecked")

@@ -68,7 +68,7 @@ public class TitleFormFieldViewModelFactory extends FormFieldViewModelFactory<Ti
 
     protected void fillList(final TitleFormFieldViewModel viewModel, final FormFieldWithOptions<String> formFieldWithOptions) {
         viewModel.setList(formFieldWithOptions.getFormOptions().stream()
-                .map(titleKey -> titleFormSelectableOptionViewModelFactory.create(i18nResolver.resolveOrKey(titleKey), formFieldWithOptions.getFormField().value()))
+                .map(titleKey -> titleFormSelectableOptionViewModelFactory.create(i18nResolver.getOrKey(titleKey), formFieldWithOptions.getFormField().value()))
                 .collect(toList()));
     }
 }

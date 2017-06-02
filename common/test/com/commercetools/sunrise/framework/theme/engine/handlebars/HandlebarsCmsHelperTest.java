@@ -1,22 +1,18 @@
 package com.commercetools.sunrise.framework.theme.engine.handlebars;
 
 import com.commercetools.sunrise.cms.CmsPage;
-import com.commercetools.sunrise.framework.theme.i18n.TestableI18nResolverLoader;
-import com.commercetools.sunrise.framework.viewmodels.PageData;
-import com.commercetools.sunrise.framework.theme.engine.TemplateContext;
+import com.commercetools.sunrise.framework.localization.UserLanguage;
 import com.commercetools.sunrise.framework.theme.engine.TemplateEngine;
-import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifierFactory;
+import com.commercetools.sunrise.framework.viewmodels.PageData;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
-import com.github.jknack.handlebars.io.TemplateLoader;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public class HandlebarsCmsHelperTest {
 
@@ -36,8 +32,7 @@ public class HandlebarsCmsHelperTest {
     }
 
     private static String renderTemplate(final String templateName, final TemplateEngine templateEngine) throws Exception {
-        final TemplateContext templateContext = new TemplateContext(new PageData(), emptyList(), cmsPage());
-        return templateEngine.render(templateName, templateContext);
+        return templateEngine.render(templateName, new PageData(), cmsPage());
     }
 
     private static CmsPage cmsPage() {
@@ -48,9 +43,11 @@ public class HandlebarsCmsHelperTest {
     }
 
     private static TemplateEngine handlebarsTemplateEngine() {
-        final TestableI18nResolverLoader i18nResolver = new TestableI18nResolverLoader(emptyMap());
-        final List<TemplateLoader> templateLoaders = singletonList(new ClassPathTemplateLoader("/templates/cmsHelper"));
-        final Handlebars handlebars = HandlebarsFactory.create(templateLoaders, i18nResolver, new I18nIdentifierFactory());
-        return HandlebarsTemplateEngine.of(handlebars, new HandlebarsContextFactory(new PlayJavaFormResolver(msg -> msg)));
+        final Handlebars handlebars = new Handlebars()
+                .with(new ClassPathTemplateLoader("/templates/cmsHelper"));
+        final HandlebarsContextSettings handlebarsSettings = mock(HandlebarsContextSettings.class);
+        final UserLanguage userLanguage = mock(UserLanguage.class);
+        final HandlebarsContextFactory contextFactory = new HandlebarsContextFactory(handlebarsSettings, userLanguage);
+        return new HandlebarsTemplateEngine(handlebars, contextFactory);
     }
 }
