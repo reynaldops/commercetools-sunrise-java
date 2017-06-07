@@ -3,7 +3,6 @@ package com.commercetools.sunrise.framework.theme.engine.handlebars.helpers;
 import com.commercetools.sunrise.framework.theme.i18n.I18nIdentifierFactory;
 import com.commercetools.sunrise.framework.theme.i18n.I18nResolver;
 import com.commercetools.sunrise.framework.theme.i18n.I18nSettings;
-import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Options;
 
 import javax.inject.Inject;
@@ -28,14 +27,14 @@ final class HandlebarsI18nHelperImpl implements HandlebarsI18nHelper {
 
     @Override
     public CharSequence apply(final String context, final Options options) throws IOException {
-        final List<Locale> locales = getLocalesFromContext(options.context);
+        final List<Locale> locales = findLocales(options);
         final I18nResolver i18nResolver = I18nResolver.of(locales, i18nSettings, i18nIdentifierFactory);
         return i18nResolver.getOrEmpty(context);
     }
 
     @SuppressWarnings("unchecked")
-    private static List<Locale> getLocalesFromContext(final Context context) {
-        final Object languageTagsAsObject = context.get(LANGUAGE_TAGS_KEY);
+    private static List<Locale> findLocales(final Options options) {
+        final Object languageTagsAsObject = options.data(LANGUAGE_TAGS_KEY);
         if (languageTagsAsObject instanceof List) {
             final List<String> locales = (List<String>) languageTagsAsObject;
             return locales.stream()
